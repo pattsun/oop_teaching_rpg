@@ -17,12 +17,17 @@ public class Character{
     this.job = job;
   }
 
+  public String get_name(){
+    return name;
+  }
+
+  public int get_hp(){
+    return hp;
+  }
+
   public void introduce(){
-    if(hp<=0){
-      System.out.println("返事がない、ただのしかばねのようだ");
-    }else{
-      System.out.println("私の名は"+name+"、HP"+hp+"、MP"+mp+"の"+job+"だ！");
-    }
+    if(check_dead())return;
+    System.out.println("私の名は"+name+"、HP"+hp+"、MP"+mp+"の"+job+"だ！");
   }
 
   private void damage(int power){
@@ -32,7 +37,14 @@ public class Character{
   }
 
   public void attack(Character target){
+    if(check_dead())return;
     System.out.println(name+"の攻撃！");
     target.damage(10);
+  }
+
+  private boolean check_dead(){
+    boolean is_dead = hp<=0;
+    if(is_dead)System.out.println(name+"はしんでいる");
+    return is_dead;
   }
 }
